@@ -233,13 +233,18 @@ export async function groupsTree(session) {
 }
 
 /**
- * Get group members
+ * Users list
  * @param {Object} session Current session
  * @param {string} group Group id
  * @returns
  */
 export async function usersList(session, group) {
-  const resp = await vaultedAPI(session, "get", "/groups/"+group+"/users")
+  var resp
+  if ( group ) {
+    resp = await vaultedAPI(session, "get", "/groups/"+group+"/users")
+  } else {
+    resp = await vaultedAPI(session, "get", "/users")
+  }
   return resp
 }
 
